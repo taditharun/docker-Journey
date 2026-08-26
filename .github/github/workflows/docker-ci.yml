@@ -1,6 +1,6 @@
 name: YAML Practice
 
-on:
+"on":
   push:
 
 jobs:
