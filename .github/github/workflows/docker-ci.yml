@@ -1,0 +1,21 @@
+name: YAML Practice
+
+on:
+  push:
+
+jobs:
+  practice:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Hello
+        run: echo "Hello Tharun"
+
+      - name: Show directory
+        run: pwd
+
+      - name: List files
+        run: ls -la
+
+      - name: Python version
+        run: python --version
