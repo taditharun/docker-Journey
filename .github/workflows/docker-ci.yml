@@ -1,21 +1,32 @@
-name: YAML Practice
+name: Docker CI
 
-"on":
+on:
   push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
 
 jobs:
-  practice:
+  test-and-build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Hello
-        run: echo "Hello Tharun"
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Show directory
-        run: pwd
-
-      - name: List files
+      - name: Check project files
         run: ls -la
 
-      - name: Python version
-        run: python --version
+      - name: Check application
+        run: ls -la app
+
+      - name: Build Docker image
+        run: docker build -t docker-journey:test .
+
+      - name: Verify Docker image
+        run: docker image inspect docker-journey:test
