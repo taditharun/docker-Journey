@@ -28,5 +28,16 @@ jobs:
       - name: Build Docker image
         run: docker build -t docker-journey:test .
 
-      - name: Verify Docker image
-        run: docker image inspect docker-journey:test
+      - name: Start Docker container
+        run: docker run -d -p 8080:80 --name docker-web-test docker-journey:test
+
+      - name: Test application
+        run: curl --fail http://localhost:8080
+
+      - name: Show container logs
+        if: always()
+        run: docker logs docker-web-test
+
+      - name: Stop Docker container
+        if: always()
+        run: docker rm -f docker-web-test
